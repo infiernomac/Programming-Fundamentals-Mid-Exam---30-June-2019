@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Tasks_Planner
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<int> task = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+
+
+			while (true)
+			{
+				string[] imput = Console.ReadLine().Split().ToArray();
+
+				if (imput[0].Equals("End"))
+				{
+					break;
+				}
+				else if (imput[0].Equals("Complete"))
+				{
+					int index = int.Parse(imput[1]);
+
+					if (index > -1 && index < task.Count)
+					{
+						task[index] = 0;
+					}
+				}
+				else if (imput[0].Equals("Change"))
+				{
+					int index = int.Parse(imput[1]);
+					int time = int.Parse(imput[2]);
+
+					if (index > -1 && index < task.Count)
+					{
+						task[index] = time;
+					}
+				}
+				else if (imput[0].Equals("Drop"))
+				{
+					int index = int.Parse(imput[1]);
+
+					if (index > -1 && index < task.Count)
+					{
+						task[index] = -1;
+					}
+				}
+				else if (imput[0].Equals("Count"))
+				{
+					if (imput[1].Equals("Completed"))
+					{
+						int count = 0;
+
+						foreach (var item in task.Where(x => x.Equals(0)))
+						{
+							count++;
+						}
+
+						Console.WriteLine(count);
+					}
+					else if (imput[1].Equals("Incomplete"))
+					{
+						int count = 0;
+
+						foreach (var item in task.Where(x => x > 0))
+						{
+							count++;
+						}
+
+						Console.WriteLine(count);
+					}
+					else
+					{
+						int count = 0;
+
+						foreach (var item in task.Where(x => x < 0))
+						{
+							count++;
+						}
+
+						Console.WriteLine(count);
+					}
+				}
+			}
+
+			foreach (var item in task.Where(x => x > 0))
+			{
+				Console.Write(item + " ");
+			}
+		}
+	}
+}
