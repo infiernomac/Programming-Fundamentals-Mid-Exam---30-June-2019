@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace infierno
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> contact = Console.ReadLine().Split().ToList();
+
+            while (true)
+            {
+
+                string[] commands = Console.ReadLine().Split().ToArray();
+
+                if (commands[0].Equals("Add"))
+                {
+                    if (contact.Contains(commands[1]))
+                    {
+                        int index = int.Parse(commands[2]);
+
+                        if (index >= 0 && index < contact.Count)
+                        {
+                            contact.Insert(index, commands[1]);
+                        }
+                    }
+                    else
+                    {
+                        contact.Add(commands[1]);
+                    }
+                }
+                else if (commands[0].Equals("Remove"))
+                {
+                    int index = int.Parse(commands[1]);
+
+                    if (index >= 0 && index < contact.Count)
+                    {
+                        contact.RemoveAt(index);
+                    }
+                }
+                else if (commands[0].Equals("Export"))
+                {
+                    int startIndex = int.Parse(commands[1]);
+                    int count = int.Parse(commands[2]);
+
+                        int listCountCheck = startIndex + count;
+
+                        if (listCountCheck >= contact.Count)
+                        {
+                            for (int a = startIndex; a < contact.Count; a++)
+                            {
+                                Console.Write($"{contact[a]} ");
+               
+                            }
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            for (int b = 0; b < count; b++)
+                            {
+                                Console.Write($"{contact[b + startIndex]} ");
+                            }
+                            Console.WriteLine();
+                        }
+                }
+                else
+                {
+                    if (commands[1].Equals("Normal"))
+                    {
+                        Console.WriteLine($"Contacts: {string.Join(" ", contact) }");
+                        break;
+                    }
+                    else
+                    {
+                        contact.Reverse();
+                        Console.WriteLine($"Contacts: {string.Join(" ", contact) }");
+                        break;
+                    }
+
+                }
+            }
+        }
+    }
+}
