@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace infierno
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int steps = int.Parse(Console.ReadLine());
+            double length = double.Parse(Console.ReadLine());
+            int distance = int.Parse(Console.ReadLine());
+ 
+
+            double travelDistance = 0;
+
+            for (int i = 1; i <= steps; i++)
+            {
+                if ((i % 5).Equals(0))
+                {
+
+                   travelDistance += length * 0.7;
+
+                }
+                else
+                {
+                    travelDistance += length;
+                }
+            }
+
+            travelDistance /= 100;
+
+            double procents = (travelDistance / distance) * 100;
+
+            Console.WriteLine($"You travelled {procents:f2}% of the distance!");
+            
+        }
+    }
+}
