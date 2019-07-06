@@ -1,0 +1,34 @@
+using System;
+
+namespace Giftbox_Coverage
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			double sizeSide = double.Parse(Console.ReadLine());
+			int sheetsOfPaper = int.Parse(Console.ReadLine());
+			double singleSheet = double.Parse(Console.ReadLine());
+
+			double areaSide = sizeSide * sizeSide * 6;
+
+			double sum = 0;
+
+			for (int i = 1; i <= sheetsOfPaper; i++)
+			{
+				if ((i % 3).Equals(0))
+				{
+					sum += singleSheet * 0.25;
+				}
+				else
+				{
+					sum += singleSheet;
+				}
+			}
+
+			double areaCovered = (sum / areaSide) * 100;
+
+			Console.WriteLine($"You can cover {areaCovered:f2}% of the box.");
+		}
+	}
+}
